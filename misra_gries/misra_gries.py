@@ -1,5 +1,4 @@
 from collections import Counter
-from pprint import pprint
  
 def misra_gries(stream, k):
     counters = Counter()

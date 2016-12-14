@@ -6,6 +6,9 @@ import os
 
 ## user inputs number of counters, item to estimate frequency for, 
 ## distribution to use to generate random data, stream length to generate
+## thanks to Huy Nguyen (https://www.huyng.com/posts/python-performance-analysis) for performance analysis suggestions
+## thanks to Robert Kern for the time line profiler, and Fabian Pedregosa for the memory line profiler
+
 while True:
 	try:
 		counters = int(input("How many counters would you like to use? "))
@@ -38,6 +41,7 @@ while True:
 	except: 
 		print("not a valid choice")
 
+## this line functions with kernprof.py to evaluate time performance and with memory_profiler to evaluate memory use
 @profile
 def main(item, counters, distribution, stream_length):
 	## generate random data
