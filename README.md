@@ -28,6 +28,16 @@ The theoretical space usage of the Misra-Gries algorithm is O(k(log m + log n)))
 ![Theoretical vs. Observed space usage, m=500000](https://github.com/joshuaeitan/misra_gries/blob/master/graphs/m%3D500000.png)
 ![Theoretical vs. Observed space usage, m=1000000](https://github.com/joshuaeitan/misra_gries/blob/master/graphs/m%3D1000000.png)
 
+# Time Complexity Analysis
+
+In analyzing the algorithm?s time complexity, I also averaged 5 runs with each set of parameters, in order to smooth out random variations. Unfortunately, as I couldn?t get the Java version to work, I have nothing to compare the runtime to other than my results from runs with different parameters.
+
+As with the space usage analysis, the results depend significantly on the number of counters. Once we have enough counters that nothing needs to be decremented or deleted, the algorithm runs up to three times as quickly. With 100 counters and a stream size of 10000000 items, the algorithm took nearly 7 seconds to run, while the same stream size with 10000 counters took just over 2 seconds. Stream size had a significant, nearly perfectly linear, effect on runtime; even with a high number of counters, the algorithm took approximately 5 times as long to run with a stream size of 500000 (1s) vis a vis a stream size of 100000 (.2s), and twice as long for a stream size of 1000000 as 500000 (2s).
+
+As I said before, I don?t know how this compares to a Java implementation, but it is definitely a plus that the runtime depends linearly on the stream size, even when there are fewer counters than unique items in the stream.
+
+![Theoretical vs. Observed space usage, m=100000](https://github.com/joshuaeitan/misra_gries/blob/master/graphs/runtime.png)
+
 #License
 See the LICENSE file for license rights and limitations (MIT).
 
