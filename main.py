@@ -11,7 +11,7 @@ import os
 
 while True:
 	try:
-		counters = int(input("How many counters would you like to use? ") or 100000)
+		counters = int(input("How many counters would you like to use? ") or 500)
 		assert(counters > 0), 'Number must be greater than 0'
 		break
 	except:
@@ -36,7 +36,7 @@ while True:
 
 while True:
 	try:
-		stream_length = int(input("How large a stream would you like to use? ") or 1000000)
+		stream_length = int(input("How large a stream would you like to use? ") or 100000)
 		assert(stream_length>0)
 		break
 	except: 
@@ -45,7 +45,7 @@ print("you entered " + str(stream_length))
 
 while True:
 	try:
-		accuracy = input("Do you want to perform an analysis of the algorithm's accuracy? (yes or no) - Warning: It can be slow ") or "no"
+		accuracy = input("Do you want to perform an analysis of the algorithm's accuracy? (yes or no) - Warning: It can be slow ") or "yes"
 		assert(accuracy.lower() in ('yes','no'))
 		break
 	except:
@@ -53,7 +53,7 @@ while True:
 print("you said " + accuracy)
 
 ## this line functions with kernprof.py to evaluate time performance and with memory_profiler to evaluate memory use
-@profile
+#@profile
 def main(item, counters, distribution, stream_length,accuracy):
 	## generate random data
 	if distribution.lower() == 'uniform':
