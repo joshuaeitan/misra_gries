@@ -8,13 +8,14 @@ def misra_gries(stream, k):
             counters[item] += 1
         ## case 2: item doesn't have counter and there are no empty counters
         else:
-            for item in list(counters.keys()):
-                counters[item] -= 1
-                if counters[item] == 0:
-                    del counters[item]
-    return counters.most_common(k)
+            for key in list(counters.keys()):
+                counters[key] -= 1
+                counters["decrements"]+=1
+                if counters[key] == 0:
+                    del counters[key]
+    return counters
 
-## need to yield one item to misra-gries at a time to simulate a data stream
+## yield one item to misra-gries at a time to simulate a data stream
 def get_items(data):
 	for item in data:
 		yield item

@@ -19,8 +19,8 @@ while True:
 print("you entered " + str(counters))
 
 while True:
-	item = int(input("Which item's frequency would you like to estimate? (Items are integers in [-5000,5000] ") or 0)
-	if int(item) not in range(-5000,5001):
+	item = int(input("Which item's frequency would you like to estimate? (Items are integers in [-50000,50000] ") or 0)
+	if int(item) not in range(-50000,50001):
 		print("not a valid choice")
 	else:
 		print ("you entered " + str(item))
@@ -45,7 +45,7 @@ print("you entered " + str(stream_length))
 
 while True:
 	try:
-		accuracy = input("Do you want to perform an analysis of the algorithm's accuracy? (yes or no) - Warning: It can be slow ")
+		accuracy = input("Do you want to perform an analysis of the algorithm's accuracy? (yes or no) - Warning: It can be slow ") or "yes"
 		assert(accuracy.lower() in ('yes','no'))
 		break
 	except:
@@ -64,7 +64,7 @@ def main(item, counters, distribution, stream_length,accuracy):
 	## run MG on data
 	out = misra_gries(get_items(data),int(counters))
 	try:
-		estimate = [t[1] for t in out if t[0] == item][0]
+		estimate = out[item]
 	except:
 		estimate = 0
 	print("The estimated frequency of item " + str(item) + " is: " + str(estimate))
@@ -72,16 +72,18 @@ def main(item, counters, distribution, stream_length,accuracy):
 	## accuracy analysis - this is slow	
 	if accuracy=='yes':
 		frequencies = get_frequencies(data)
-		errors = get_errors(out,frequencies[0],frequencies[1])
-		items = frequencies[1]
-		max_error = max(errors[0])
+		total_error = out['decrements']
+		errors = get_errors(out,frequencies[0])
+		n_items = frequencies[1]
+		max_error = max(errors.values())
 		# need if statement for case when there are no errors (more counters than unique items)
-		if errors[1] == 1:
+		if sum(out.values()) == 0:
 			print("All counters have value zero")
+		print("the estimate for your item, " + str(item) + ", was off by " + str(errors[item]))
 		print("The largest error is " + str(max_error))
-		print("The total error across all items is approximately " + str(sum(errors[0])))
-		print("The average error per item is approximately " + str(sum(errors[0])/items))
-		test_errors(errors[0],stream_length,counters)
+		print("The total error across all items is " + str(total_error))
+		print("The average error per item is " + str(total_error/n_items))
+		test_errors(errors,stream_length,counters)
 
 
 if __name__ == "__main__":

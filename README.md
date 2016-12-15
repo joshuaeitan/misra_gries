@@ -1,4 +1,4 @@
-# Implementing the Misra-Gries Algorithm for deterministically estimating item frequency in a stream. 
+# Implementing the Misra-Gries Algorithm for deterministically estimating item frequency in the vanilla streaming model. 
 
 This package generates test data streams from either the normal or uniform distribution, runs the Misra-Gries algorithm on them, and analyzes the algorithm’s performance.
 
@@ -24,9 +24,9 @@ There are some fluky results (memory usage increases significantly in relative t
 
 The theoretical space usage of the Misra-Gries algorithm is O(k(log m + log n))). The data universe I sampled from for the test runs is [-50000,50000]. Since the sign is important, items in the data universe take up to 17 bits to represent (log n <= 17). In my testing runs, the size of the data stream, m, ranges from 1e5 to 1e6, thus log m ranges from 17 to 20. Finally, in my testing runs the number of counters, k, ranges from 1e2 to 1e5. Thus, theoretically, the space usage should be O(3400-3.7 million bits). In fact, it ranges from ~13000 to ~22.5 million bits, off by a factor of 4 on the low end, and a factor of ~6 on the higher end. As the factor by which the space usage differs from the theoretical value is not constant, it seems this implementation is not optimal, but it is pretty close. It would be interesting to compare it to the space usage of the optimized Java library, but unfortunately I couldn?t figure out how to get the Java library to do what I wanted (I do not have much experience with Java).
 
-![Theoretical vs. Observed space usage, m=100000](https://github.com/joshuaeitan/misra_gries/blob/master/m%3D100000.png)
-![Theoretical vs. Observed space usage, m=500000](https://github.com/joshuaeitan/misra_gries/blob/master/m%3D500000.png)
-![Theoretical vs. Observed space usage, m=1000000](https://github.com/joshuaeitan/misra_gries/blob/master/m%3D1000000.png)
+![Theoretical vs. Observed space usage, m=100000](https://github.com/joshuaeitan/misra_gries/blob/master/graphs/m%3D100000.png)
+![Theoretical vs. Observed space usage, m=500000](https://github.com/joshuaeitan/misra_gries/blob/master/graphs/m%3D500000.png)
+![Theoretical vs. Observed space usage, m=1000000](https://github.com/joshuaeitan/misra_gries/blob/master/graphs/m%3D1000000.png)
 
 #License
 See the LICENSE file for license rights and limitations (MIT).
