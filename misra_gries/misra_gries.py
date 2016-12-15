@@ -1,5 +1,5 @@
 from collections import Counter
- 
+
 def misra_gries(stream, k):
     counters = Counter()
     for item in stream:
