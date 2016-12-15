@@ -11,7 +11,7 @@ import os
 
 while True:
 	try:
-		counters = int(input("How many counters would you like to use? ") or 100000)
+		counters = int(input("How many counters would you like to use? ") or 5000)
 		assert(counters > 0), 'Number must be greater than 0'
 		break
 	except:
@@ -19,8 +19,8 @@ while True:
 print("you entered " + str(counters))
 
 while True:
-	item = int(input("Which item's frequency would you like to estimate? (Items are integers in [-50000,50000] ") or 0)
-	if int(item) not in range(-50000,50001):
+	item = int(input("Which item's frequency would you like to estimate? (Items are integers in [-5000,5000] ") or 0)
+	if int(item) not in range(-5000,5001):
 		print("not a valid choice")
 	else:
 		print ("you entered " + str(item))
@@ -79,7 +79,7 @@ def main(item, counters, distribution, stream_length,accuracy):
 		# need if statement for case when there are no errors (more counters than unique items)
 		if sum(out.values()) == 0:
 			print("All counters have value zero")
-		print("the estimate for your item, " + str(item) + ", was off by " + str(errors[item]))
+		print("the estimate for your item, " + str(item) + ", was low by " + str(errors[item]))
 		print("The largest error is " + str(max_error))
 		print("The total error across all items is " + str(total_error))
 		print("The average error per item is " + str(total_error/n_items))
